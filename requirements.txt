@@ -1,0 +1,51 @@
+# Aperture backend dependencies.
+#
+# These are kept loosely pinned so pip can pick wheels for whichever Python
+# version the user has — including 3.12, 3.13, 3.14. Compiling scipy/numpy from
+# source requires a Fortran compiler most users don't have, so we rely on
+# pre-built wheels only (`--prefer-binary` in start.bat).
+
+# Core
+fastapi>=0.115
+uvicorn[standard]>=0.32
+pydantic>=2.9
+pydantic-settings>=2.6
+httpx>=0.27
+orjson>=3.10
+python-multipart>=0.0.17
+
+# Data
+duckdb>=1.1
+polars>=1.12
+pyarrow>=18
+sqlglot>=25.30
+pandas>=2.2
+numpy>=2.0
+scipy>=1.14
+statsmodels>=0.14
+
+# Storage / infra
+psycopg[binary]>=3.2
+redis>=5.2
+sqlalchemy>=2.0
+
+# Catalog / entity linking
+rapidfuzz>=3.10
+datasketch>=1.6
+pyyaml>=6.0
+
+# Embeddings (local, CPU) — optional; T1 falls back to BM25 when absent.
+# fastembed>=0.4  # uncomment on Python 3.10-3.12 only
+
+# Auth / security (kept for the compile service's token helpers)
+python-jose[cryptography]>=3.3
+passlib[bcrypt]>=1.7
+
+# Observability
+prometheus-client>=0.21
+structlog>=24.4
+
+# Dev / test
+pytest>=8
+pytest-asyncio>=0.24
+ruff>=0.7

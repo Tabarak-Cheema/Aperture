@@ -1,0 +1,15 @@
+Aperture Source-Available License v1.0
+Copyright (c) 2026 Aperture contributors.
+
+Portions of this repository (specifically `packages/aqir/`) are dual-licensed under
+the Apache License 2.0; see `packages/aqir/LICENSE` for that text.
+
+All other files are made available under the following terms:
+
+1. You may use, copy, modify and run the software for internal evaluation,
+   development and non-commercial use.
+2. You may not offer the software, or any substantial portion of it, as a hosted
+   service to third parties.
+3. The software is provided "AS IS", WITHOUT WARRANTY OF ANY KIND.
+
+For a commercial license covering hosting rights, contact the maintainers.

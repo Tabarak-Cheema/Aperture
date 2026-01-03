@@ -1,0 +1,40 @@
+[project]
+name = "aperture"
+version = "0.1.0"
+description = "Local-first analytics engine where the LLM is a compiler, not a runtime."
+requires-python = ">=3.10"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "Aperture contributors" }]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = ["apps/web", ".venv"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "A", "C4", "SIM", "RUF"]
+# B008 is a false positive for FastAPI Depends/Body/Header injection, which is
+# the intended calling pattern there.
+# UP007/UP035/UP045 would rewrite typing to Python 3.11+ idioms.
+# RUF002/RUF003 complain about en-dashes inside prose docstrings.
+ignore = ["E501", "B008", "RUF002", "RUF003", "UP007", "UP035", "UP045"]
+
+[tool.pytest.ini_options]
+testpaths = ["packages", "services", "evals", "apps"]
+pythonpath = [
+    "packages/aqir",
+    "packages/catalog",
+    "packages/llm_gateway",
+    "services/compile",
+    "services/query",
+    "services/ingest",
+    "services/insight",
+    "apps/server",
+]
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+strict_optional = true
