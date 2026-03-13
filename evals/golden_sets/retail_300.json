@@ -1,0 +1,12 @@
+[
+  {"question": "revenue by region", "expected_metrics": ["revenue"], "expected_dimensions": ["region"]},
+  {"question": "sales by country", "expected_metrics": ["revenue"], "expected_dimensions": ["country"]},
+  {"question": "gmv by region", "expected_metrics": ["revenue"], "expected_dimensions": ["region"]},
+  {"question": "top 10 country by sales", "expected_metrics": ["revenue"], "expected_dimensions": ["country"]},
+  {"question": "orders by city", "expected_metrics": ["order_count"], "expected_dimensions": ["city"]},
+  {"question": "aov by region", "expected_metrics": ["avg_order_value"], "expected_dimensions": ["region"]},
+  {"question": "revenue by region last quarter", "expected_metrics": ["revenue"], "expected_dimensions": ["region"]},
+  {"question": "monthly revenue trend", "expected_metrics": ["revenue"], "expected_dimensions": []},
+  {"question": "top 5 region by gmv", "expected_metrics": ["revenue"], "expected_dimensions": ["region"]},
+  {"question": "order count by country last year", "expected_metrics": ["order_count"], "expected_dimensions": ["country"]}
+]
