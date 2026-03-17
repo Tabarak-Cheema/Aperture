@@ -1,0 +1,49 @@
+name: release
+on:
+  push:
+    tags: ["v*.*.*"]
+permissions:
+  contents: write
+
+jobs:
+  desktop:
+    name: build Aperture (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            exe: dist/Aperture.exe
+            asset: Aperture-windows.exe
+          - os: macos-latest
+            exe: dist/Aperture
+            asset: Aperture-macos
+          - os: ubuntu-latest
+            exe: dist/Aperture
+            asset: Aperture-linux
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12", cache: pip }
+      - uses: actions/setup-node@v4
+        with: { node-version: "20", cache: npm, cache-dependency-path: apps/web/package-lock.json }
+      - name: Install Python deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install --prefer-binary --only-binary=:all: -r requirements.txt
+          pip install pyinstaller
+      - name: Build web
+        working-directory: apps/web
+        run: |
+          npm ci --legacy-peer-deps || npm install --legacy-peer-deps
+          npm run build
+      - name: Bundle with PyInstaller
+        run: pyinstaller --noconfirm --clean apps/desktop/aperture.spec
+      - name: Rename asset
+        shell: bash
+        run: mv "${{ matrix.exe }}" "${{ matrix.asset }}"
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ matrix.asset }}
+          generate_release_notes: true
