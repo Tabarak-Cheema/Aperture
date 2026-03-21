@@ -1,0 +1,12 @@
+# Optional: run Aperture in a container instead of ./start.bat
+# Projects are persisted to a bind-mounted ~/.aperture on the host.
+services:
+  aperture:
+    build:
+      context: ..
+      dockerfile: deploy/docker/Dockerfile
+    image: aperture:local
+    ports:
+      - "8000:8000"
+    volumes:
+      - ${APERTURE_HOME:-~/.aperture}:/root/.aperture
